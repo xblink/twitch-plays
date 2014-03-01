@@ -4,6 +4,7 @@ from config.config import config
 from lib.irc import Irc
 from lib.game import Game
 from lib.misc import pbutton
+from lib.stats import Stats
 
 class Bot:
 
@@ -31,6 +32,7 @@ class Bot:
                 username = message['username'].lower()
 
                 if not self.game.is_valid_button(button):
+                    Stats.tallyMessage(username, message['message'])
                     continue
 
                 if button in self.config['throttled_buttons']:
@@ -42,3 +44,4 @@ class Bot:
                 self.set_message_buffer({'username': username, 'button': button})
                 pbutton(self.message_buffer)
                 self.game.push_button(button)
+                Stats.tallyButton(username, button)
