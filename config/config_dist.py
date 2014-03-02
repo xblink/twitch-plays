@@ -20,12 +20,13 @@ config = {
         'gui_stats': False,
         'console_stats': True,
         'play_game': False,
-        'buttonpresses_on': True
+        'pbutton_on': False
     },
         
     'misc': {
         'chat_height': 13,
-        'blocked_buttons': [ 'select' ]
+        'blocked_buttons': [ 'select' ],
+        'IDLE_TIMEOUT': 999
     }
 
 }

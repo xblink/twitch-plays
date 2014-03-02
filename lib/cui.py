@@ -19,7 +19,7 @@ def pbot(message, channel=''):
 def pbutton(message_buffer):
     system('cls')
     print '\n\n'
-    print '\n'.join(['     {0:<12s}   {1:>9s}'.format(message['username'][:12].title(), message['button'].lower()) for message in message_buffer])
+    print '\n'.join(['          {0:<12s}      {1:>9s}'.format(message['username'][:12].title(), message['button'].lower()) for message in message_buffer])
     
 def pframe(stats):
     system('cls')
@@ -27,15 +27,20 @@ def pframe(stats):
     frame = []
     
     for message in stats.message_buffer:
-        if not message['username'] is '':
-            seconds = '{0:>3}s'.format(int(stats.lastMessage[message['username'].lower()][1]['timeDiff']))
-            multFactor = 'x{0:<3}'.format(stats.userTally[message['username'].lower()])
+        username = message['username'].lower()
+        if username != '':
+            seconds = '{0:>3}s'.format(stats.get_seconds(username))
+            multFactor = 'x{0:<3}'.format(stats.lastMessage[username][2])
         else:
             seconds = ''
             multFactor = ''
-        name = message['username'][:12].title()
         button = message['button'].lower()
         
-        frame.append(' {0:>4s} {1:<12s}   {2:>9s} {3:<4}'.format(seconds, name, button, multFactor))
+        frame.append('  {0:>8} {1:<12s}      {2:>9s} {3:<4}'.format(seconds, username[:12].title(), button, multFactor))
         
+    frame.append('\n')
+    for graph in stats.graphList.values():
+        frame.append(graph.get_ascii())
+    
     print '\n'.join(frame)
+    

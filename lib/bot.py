@@ -52,5 +52,5 @@ class Bot:
                 if self.config['features']['console_stats']:
                     pframe(self.stats)
                     
-            elif self.config['features']['buttonpresses_on']:
+            elif self.config['features']['pbutton_on']:
                 pbutton(self.stats.message_buffer)
