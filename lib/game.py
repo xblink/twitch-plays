@@ -1,6 +1,5 @@
-import win32api
-import win32con
-import time
+
+import time, win32api, win32con
 
 class Game:
 
@@ -12,7 +11,10 @@ class Game:
         'a': 0x34,
         'b': 0x35,
         'start': 0x36,
-        'select': 0x37
+        'select': 0x37,
+        'democracy': None,
+        'anarchy': None,
+        'start9': None
     }
 
     def get_valid_buttons(self):
@@ -20,6 +22,9 @@ class Game:
 
     def is_valid_button(self, button):
         return button in self.keymap.keys()
+    
+    def is_political(self, button):
+        return button in ['anarchy','democracy','start9']
 
     def button_to_key(self, button):
         return self.keymap[button]

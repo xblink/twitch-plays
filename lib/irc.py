@@ -23,7 +23,8 @@ class Irc:
 
         server = self.config['irc']['server']
         port = self.config['irc']['port']
-
+        channel = self.config['irc']['channel']
+        
         try:
             sock.connect((server, port))
         except:
@@ -47,8 +48,8 @@ class Irc:
         else:
             pp('Login successful!')
 
-        sock.send('JOIN #%s\r\n' % username)
-        pp('Joined #%s' % username)
+        sock.send('JOIN #%s\r\n' % channel)
+        pp('Joined #%s' % channel)
 
     def ping(self, data):
         if data.startswith('PING'):
